@@ -1,0 +1,38 @@
+@font-face {
+    font-family: EnchantFont;
+    src: url('others/EnchantingTable-Regular.ttf') format('truetype');
+}
+
+
+.card{
+    border: 10px solid #508132;
+    border-radius: 10px;
+    width: 250px;
+    height: 433px;
+}
+.cardsDiv{
+    display: flex;
+}
+.cardDiv{
+    flex-wrap: wrap;
+    margin: 10px;
+}
+.cardText{
+    font-family: EnchantFont;
+    position: relative;
+    top: -8%;
+    text-align: center;
+}
+.cardTitle{
+    font-family: EnchantFont;
+    position: relative;
+    margin: auto;
+    top: -64%;
+    left: 0%;
+    font-size: 30px;
+    transform: rotate(22deg);
+}
+
+path {
+    fill: transparent;
+}
