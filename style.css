@@ -12,6 +12,7 @@
 }
 .cardsDiv{
     display: flex;
+    margin-top: 20%;
 }
 .cardDiv{
     flex-wrap: wrap;
@@ -27,7 +28,7 @@
     font-family: EnchantFont;
     position: relative;
     margin: auto;
-    top: -64%;
+    top: -66.5%;
     left: 0%;
     font-size: 30px;
     transform: rotate(22deg);
@@ -35,4 +36,13 @@
 
 path {
     fill: transparent;
+}
+
+#cardSelected{
+    border: 10px solid #97ee65; 
+}
+
+.cardField{
+    background-color: red;
+    position: relative;
 }
