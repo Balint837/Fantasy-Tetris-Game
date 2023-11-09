@@ -50,7 +50,7 @@ path {
 .cardTable{
     position: relative;
     margin: auto;
-    top: -700px;
+    top: -688px;
     left: 0%;
 }
 .cardTr{
@@ -62,11 +62,26 @@ path {
 .cardTd{
     height: 54px;
     width: 54px;
-    border: 2px solid #000;
     padding: 0px;
     margin: 0px;
 }
 
-.red{
-    background-color: red;
+.tile{
+    background: url(icons/tile.png);
+}
+
+img[src="icons/"]{
+    display: none;
+}
+
+.BuildingImg{
+    height: 42px;
+    width: auto;
+    padding: 6px;
+}
+
+.OffsetCardShape{
+    position: relative;
+    margin: auto;
+    left: -27px;
 }

@@ -1,5 +1,7 @@
+import { Building } from "./building.js"
 import { CardField } from "./CardField.js"
 import { tetrisShapes } from "./shapes.js"
+import { BuildingNames } from "./shapes.js"
 
 export class Card{
         constructor(index, cards){
@@ -22,7 +24,7 @@ export class Card{
           console.log(random, tetrisShapes[random]);
 
           cardDiv.innerHTML += this.#AddImgAndTexts()
-          cardDiv.innerHTML += this.#AddTable(tetrisShapes[random])
+          cardDiv.innerHTML += this.#AddTable(tetrisShapes[random], random)
 
           cardsDiv.appendChild(cardDiv)
       }
@@ -57,13 +59,20 @@ export class Card{
         `
       }
 
-      #AddTable(matrix){
-        let result = "<table class=\"cardTable\">"
+      #AddTable(matrix, ShapeRandom){
+        let result = `<table class="cardTable ${(ShapeRandom == 0) ? "OffsetCardShape" : ""}">`
         matrix.forEach(x => {
           result += "<tr class=\"cardTr\">"
             x.forEach(i =>{
               if (i === 1){
-                result += "<td class=\"cardTd red\"></td>"
+                const random = Math.floor(Math.random() * BuildingNames.length*2);
+                let buildingName = Building.None;
+                if (random < BuildingNames.length) {
+                  buildingName = BuildingNames[random];
+                }
+                result += `<td class=\"cardTd tile\">
+                  <img src="icons/${buildingName}" alt="BuildingImage" class="BuildingImg">
+                </td>`
               }else{
                 result += "<td class=\"cardTd\"></td>"
               }
