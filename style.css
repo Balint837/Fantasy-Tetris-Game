@@ -21,14 +21,14 @@
 .cardText{
     font-family: EnchantFont;
     position: relative;
-    top: -8%;
+    top: -65px;
     text-align: center;
 }
 .cardTitle{
     font-family: EnchantFont;
     position: relative;
     margin: auto;
-    top: -66.5%;
+    top: -500px;
     left: 0%;
     font-size: 30px;
     transform: rotate(22deg);
@@ -45,4 +45,28 @@ path {
 .cardField{
     background-color: red;
     position: relative;
+}
+
+.cardTable{
+    position: relative;
+    margin: auto;
+    top: -700px;
+    left: 0%;
+}
+.cardTr{
+    height: 54px;
+    width: 126px;
+    padding: 0px;
+    margin: 0px;
+}
+.cardTd{
+    height: 54px;
+    width: 54px;
+    border: 2px solid #000;
+    padding: 0px;
+    margin: 0px;
+}
+
+.red{
+    background-color: red;
 }
