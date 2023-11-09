@@ -1,0 +1,72 @@
+@font-face {
+    font-family: EnchantFont;
+    src: url('others/EnchantingTable-Regular.ttf') format('truetype');
+}
+
+
+.card{
+    border: 10px solid #508132;
+    border-radius: 10px;
+    width: 250px;
+    height: 433px;
+}
+.cardsDiv{
+    display: flex;
+    margin-top: 20%;
+}
+.cardDiv{
+    flex-wrap: wrap;
+    margin: 10px;
+}
+.cardText{
+    font-family: EnchantFont;
+    position: relative;
+    top: -65px;
+    text-align: center;
+}
+.cardTitle{
+    font-family: EnchantFont;
+    position: relative;
+    margin: auto;
+    top: -500px;
+    left: 0%;
+    font-size: 30px;
+    transform: rotate(22deg);
+}
+
+path {
+    fill: transparent;
+}
+
+#cardSelected{
+    border: 10px solid #97ee65; 
+}
+
+.cardField{
+    background-color: red;
+    position: relative;
+}
+
+.cardTable{
+    position: relative;
+    margin: auto;
+    top: -700px;
+    left: 0%;
+}
+.cardTr{
+    height: 54px;
+    width: 126px;
+    padding: 0px;
+    margin: 0px;
+}
+.cardTd{
+    height: 54px;
+    width: 54px;
+    border: 2px solid #000;
+    padding: 0px;
+    margin: 0px;
+}
+
+.red{
+    background-color: red;
+}
