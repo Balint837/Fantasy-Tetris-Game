@@ -62,7 +62,7 @@ export class Card{
         matrix.forEach(x => {
           result += "<tr class=\"cardTr\">"
             x.forEach(i =>{
-              if (x[i] === 1){
+              if (i === 1){
                 result += "<td class=\"cardTd red\"></td>"
               }else{
                 result += "<td class=\"cardTd\"></td>"

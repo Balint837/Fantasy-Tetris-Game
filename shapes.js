@@ -42,4 +42,3 @@ export const tetrisShapes = [
       [1, 1]
     ]
   ]
-  
