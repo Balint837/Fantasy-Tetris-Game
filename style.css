@@ -70,3 +70,15 @@ path {
 .red{
     background-color: red;
 }
+
+
+#main-table {
+    padding-top: 3vh;
+    padding-bottom: 2vh;
+    float:right;
+}
+
+#main-table > tbody > tr > td {
+    border: 0.5vw solid black;
+    /*Check script.js for sizing*/
+}
