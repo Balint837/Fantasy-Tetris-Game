@@ -1,7 +1,6 @@
 import { Card } from "./card.js";
 
 function OnResize() {
-    console.log("fired OnResize");
     UpdateTableSize();
 }
 
@@ -11,14 +10,12 @@ function UpdateTableSize() {
     let height = document.documentElement.clientHeight;
     let width = document.documentElement.clientWidth;
 
-    console.log(height, width);
     height = height * 0.9;
     width = width * 0.45;
 
     height = height / document.querySelectorAll("#main-table > tbody > tr").length
     width = width / document.querySelectorAll("#main-table > tbody > tr:first-child > td").length
 
-    console.log(height, width);
     const min = Math.min(height, width);
     let squareSize = `${min}px`
     for (const element of document.querySelectorAll("#main-table > tbody > tr > td")) {

@@ -1,5 +1,4 @@
 import { Building } from "./building.js"
-import { CardField } from "./CardField.js"
 import { tetrisShapes } from "./shapes.js"
 import { BuildingNames } from "./shapes.js"
 
@@ -10,6 +9,7 @@ export class Card{
           this.isSelect = false
           this.index = index
           this.cards = cards
+          //  shape = "" static-lesz
       }
 
       Create(){
@@ -21,12 +21,12 @@ export class Card{
           });
 
           const random = Math.floor(Math.random() * tetrisShapes.length);
-          console.log(random, tetrisShapes[random]);
 
           cardDiv.innerHTML += this.#AddImgAndTexts()
           cardDiv.innerHTML += this.#AddTable(tetrisShapes[random], random)
 
           cardsDiv.appendChild(cardDiv)
+
       }
     
       #Select(){
@@ -36,6 +36,7 @@ export class Card{
             card.isSelect = true
             const cardElement = document.querySelectorAll(".cardDiv .card")[card.index]
             cardElement.id = "cardSelected";
+            this.#CreateShape(card)
           }else{
             card.isSelect = false
             const cardElement = document.querySelectorAll(".cardDiv .card")[card.index]
@@ -47,7 +48,6 @@ export class Card{
       #AddImgAndTexts(){
         const randomStr = this.#generateRandomString();
         const randomStr2 = this.#generateRandomString();
-        console.log(randomStr)
         return `
         <div class="card cardImg">
         <p class="cardText">${randomStr}</p>
@@ -97,5 +97,13 @@ export class Card{
           });
         result += "</table></div>"
         return result 
+      }
+
+      #CreateShape(card){
+       console.log(this.cards[0])
+      //  console.log(this.cards[1]) Elkészíti a cardot
+      // [null, building.fkldésaf],
+      // [buldifla. fjkldjasfé, null]
+
       }
 }
