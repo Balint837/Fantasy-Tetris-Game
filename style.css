@@ -3,6 +3,14 @@
     src: url('others/EnchantingTable-Regular.ttf') format('truetype');
 }
 
+body{
+    margin: 0;
+}
+
+#base-div{
+    display: flex;
+}
+
 .cardsDiv{
     display: flex;
     margin-top: 20%;
@@ -96,6 +104,7 @@ path {
 
 #main-table {
     padding-top: 3vh;
+    padding-left: 2.5vh;
     padding-bottom: 2vh;
     float:right;
 }
