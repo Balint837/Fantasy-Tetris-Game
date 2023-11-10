@@ -85,101 +85,14 @@ path {
 .cardImg{
     background-image: url(card/card.png);
     background-size: contain;
-    /* width: 90%;
-    margin: 10px;
-    border: 0.5vw solid #508132;
-    border-radius: 1vw; */
 }
 
 .backgroundCard{
     background-image: url(card/background.png);
     background-size: contain;
 }
-/* 
-.card{
-    border: 10px solid #508132;
-    border-radius: 10px;
-    width: 100%;
-    height: auto;
-}
-.cardsDiv{
-    display: flex;
-    margin-top: 20%;
-    width: 50%;
-}
-.cardDiv{
-    flex-wrap: wrap;
-    margin: 10px;
-    width: 33.33%;
-}
-.cardText{
-    font-family: EnchantFont;
-    position: relative;
-    top: -65px;
-    text-align: center;
-}
-.cardTitle{
-    font-family: EnchantFont;
-    position: relative;
-    margin: auto;
-    top: -500px;
-    left: 0%;
-    font-size: 30px;
-    transform: rotate(22deg);
-}
-.cardDiv>img{
-    width: 90%;
-    text-align: center;
-}
-
-path {
-    fill: transparent;
-}
-
-#cardSelected{
-    border: 10px solid #97ee65; 
-}
-
-.cardField{
-    background-color: red;
-    position: relative;
-}
-
-.cardTable{
-    position: relative;
-    margin: auto;
-    top: -688px;
-    left: 0%;
-}
-.cardTr{
-    height: 54px;
-    width: 126px;
-    padding: 0px;
-    margin: 0px;
-}
-.cardTd{
-    height: 54px;
-    width: 54px;
-    padding: 0px;
-    margin: 0px;
-}
-
-.tile{
-    background: url(icons/tile.png);
-}
-
-img[src="icons/"]{
-    display: none;
-}
-
-.BuildingImg{
-    height: 42px;
-    width: auto;
-    padding: 6px;
-}
 
 .OffsetCardShape{
-    position: relative;
     margin: auto;
-    left: -27px;
-} */
+    left: -7%;
+} 
