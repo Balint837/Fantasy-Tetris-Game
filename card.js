@@ -45,18 +45,34 @@ export class Card{
 
       }
       #AddImgAndTexts(){
+        const randomStr = this.#generateRandomString();
+        const randomStr2 = this.#generateRandomString();
+        console.log(randomStr)
         return `
-        <img src="card/card.png" alt="Card" class="card">
-        <p class="cardText">sdfsdfjksdfjksdfjk</p>
+        <div class="card cardImg">
+        <p class="cardText">${randomStr}</p>
         <svg class="cardTitle" viewBox="0 0 500 500">
             <path id="curve" d="M73.2,148.6c4-6.1,65.5-96.8,178.6-95.6c111.3,1.2,170.8,90.3,175.1,97"/>
             <text width="500">
               <textPath xlink:href="#curve">
-                Dangerous Vala
+                ${randomStr2}
               </textPath>
             </text>
         </svg>
         `
+      }
+
+      #generateRandomString() {
+        const length = 14;
+        let randomString = '';
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+      
+        for (var i = 0; i < length; i++) {
+          const randomIndex = Math.floor(Math.random() * characters.length);
+          randomString += characters.charAt(randomIndex);
+        }
+      
+        return randomString;
       }
 
       #AddTable(matrix, ShapeRandom){
@@ -79,7 +95,7 @@ export class Card{
             })
             result += "</tr>"
           });
-        result += "</table>"
+        result += "</table></div>"
         return result 
       }
 }
