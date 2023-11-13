@@ -1,15 +1,25 @@
 import { Building } from "./building.js"
-import { CardField } from "./CardField.js"
 import { tetrisShapes } from "./shapes.js"
 import { BuildingNames } from "./shapes.js"
 
 export class Card{
         constructor(index, cards){
           this.cardFields = []
+          this.things = []
           this.Create()
           this.isSelect = false
           this.index = index
           this.cards = cards
+      }
+      static shape =[
+        [null, null],
+        [null, null],
+        [null, null],
+        [null, null]
+      ]
+
+      static getShape() {
+        return this.shape;
       }
 
       Create(){
@@ -21,12 +31,12 @@ export class Card{
           });
 
           const random = Math.floor(Math.random() * tetrisShapes.length);
-          console.log(random, tetrisShapes[random]);
 
           cardDiv.innerHTML += this.#AddImgAndTexts()
           cardDiv.innerHTML += this.#AddTable(tetrisShapes[random], random)
 
           cardsDiv.appendChild(cardDiv)
+
       }
     
       #Select(){
@@ -36,6 +46,7 @@ export class Card{
             card.isSelect = true
             const cardElement = document.querySelectorAll(".cardDiv .card")[card.index]
             cardElement.id = "cardSelected";
+            this.#CreateShape(card)
           }else{
             card.isSelect = false
             const cardElement = document.querySelectorAll(".cardDiv .card")[card.index]
@@ -47,7 +58,6 @@ export class Card{
       #AddImgAndTexts(){
         const randomStr = this.#generateRandomString();
         const randomStr2 = this.#generateRandomString();
-        console.log(randomStr)
         return `
         <div class="card cardImg">
         <p class="cardText">${randomStr}</p>
@@ -87,9 +97,11 @@ export class Card{
                   buildingName = BuildingNames[random];
                 }
                 result += `<td class=\"cardTd tile\">
-                  <img src="icons/${buildingName}" alt="BuildingImage" class="BuildingImg">
+                <img src="icons/${buildingName}" alt="BuildingImage" class="BuildingImg">
                 </td>`
+                this.things.push(buildingName)
               }else{
+                this.things.push(null)
                 result += "<td class=\"cardTd\"></td>"
               }
             })
@@ -97,5 +109,25 @@ export class Card{
           });
         result += "</table></div>"
         return result 
+      }
+
+      #CreateShape(card){
+        let x = 0
+        let y = 0
+        Card.shape = [
+          [null, null],
+          [null, null],
+          [null, null],
+          [null, null]
+        ]
+        card.things.forEach(element => {
+          Card.shape[x][y] = element
+          if (y == 1){
+            y = 0
+            x++
+          }else{
+            y++
+          }
+        });
       }
 }
