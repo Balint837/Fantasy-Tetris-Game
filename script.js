@@ -36,3 +36,9 @@ backgroundCard.addEventListener('click', function() {
 
 window.addEventListener('resize', OnResize)
 OnResize(); // initial call;
+
+const table = document.querySelector("#main-table")
+
+table.addEventListener('click', function() {
+    console.log(Card.shape)
+  });

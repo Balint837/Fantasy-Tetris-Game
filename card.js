@@ -114,14 +114,14 @@ export class Card{
       #CreateShape(card){
         let x = 0
         let y = 0
-        card.shape = [
+        Card.shape = [
           [null, null],
           [null, null],
           [null, null],
           [null, null]
         ]
         card.things.forEach(element => {
-          card.shape[x][y] = element
+          Card.shape[x][y] = element
           if (y == 1){
             y = 0
             x++
