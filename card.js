@@ -5,11 +5,21 @@ import { BuildingNames } from "./shapes.js"
 export class Card{
         constructor(index, cards){
           this.cardFields = []
+          this.things = []
           this.Create()
           this.isSelect = false
           this.index = index
           this.cards = cards
-          //  shape = "" static-lesz
+      }
+      static shape =[
+        [null, null],
+        [null, null],
+        [null, null],
+        [null, null]
+      ]
+
+      static getShape() {
+        return this.shape;
       }
 
       Create(){
@@ -87,9 +97,11 @@ export class Card{
                   buildingName = BuildingNames[random];
                 }
                 result += `<td class=\"cardTd tile\">
-                  <img src="icons/${buildingName}" alt="BuildingImage" class="BuildingImg">
+                <img src="icons/${buildingName}" alt="BuildingImage" class="BuildingImg">
                 </td>`
+                this.things.push(buildingName)
               }else{
+                this.things.push(null)
                 result += "<td class=\"cardTd\"></td>"
               }
             })
@@ -100,10 +112,22 @@ export class Card{
       }
 
       #CreateShape(card){
-       console.log(this.cards[0])
-      //  console.log(this.cards[1]) Elkészíti a cardot
-      // [null, building.fkldésaf],
-      // [buldifla. fjkldjasfé, null]
-
+        let x = 0
+        let y = 0
+        card.shape = [
+          [null, null],
+          [null, null],
+          [null, null],
+          [null, null]
+        ]
+        card.things.forEach(element => {
+          card.shape[x][y] = element
+          if (y == 1){
+            y = 0
+            x++
+          }else{
+            y++
+          }
+        });
       }
 }
