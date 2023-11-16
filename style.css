@@ -1,3 +1,53 @@
+body {
+    position: fixed;
+    overflow: hidden;
+    width: 1920px;
+    height: 1088px;
+    background-image: url("others/background.png");
+    background-repeat: no-repeat;
+}
+
+#btnStart{
+    width: 250px;
+    height: 150px;
+    background-color: #27382D;
+    border: 1px solid black;
+    border-radius: 20px;
+    font-size: 40px;
+    text-align: center;
+    color: aliceblue;
+    position: absolute;
+    top: 469px;
+    left: 835px;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+#btnStart:hover{
+    cursor: pointer;
+    background-color: #508132;
+}
+
+#field {
+    float: right;
+    max-width: 916px;
+    max-height: 916px;
+    margin-top: 10px;
+    margin-right: 44px;
+    border: 10px;
+    border: 10px solid #508132;
+    border-collapse: collapse;
+}
+
+td {
+    width: 88px;
+    height: 88px;
+    background-image: url(icons/tile.png);
+    border: 5px solid black;
+}
+
 @font-face {
     font-family: EnchantFont;
     src: url('others/EnchantingTable-Regular.ttf') format('truetype');
