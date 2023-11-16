@@ -1,5 +1,5 @@
 import { Card } from "./card.js";
-
+import { Settings } from "./settings.js";
 function OnResize() {
     UpdateTableSize();
 }
@@ -24,7 +24,6 @@ function UpdateTableSize() {
     }
 }
 
-
 const backgroundCard = document.querySelector(".backgroundCard")
 let cards = []
 
@@ -41,4 +40,4 @@ const table = document.querySelector("#main-table")
 
 table.addEventListener('click', function() {
     console.log(Card.shape)
-  });
+});

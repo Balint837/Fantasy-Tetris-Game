@@ -113,3 +113,8 @@ path {
     border: 0.5vw solid black;
     /*Check script.js for sizing*/
 }
+
+.selection-div{
+    opacity: 0.4;
+    background-color: blueviolet;
+}

@@ -1,4 +1,4 @@
-export class Building {
+export class Environment {
     static None = "";
     static BeforeHole = "beforeHole.png";
     static Hole = "hole.png";
