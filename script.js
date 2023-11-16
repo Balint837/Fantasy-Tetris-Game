@@ -1,5 +1,5 @@
 import { Card } from "./card.js";
-import { Settings } from "./settings.js";
+import { Table } from "./table.js";
 function OnResize() {
     UpdateTableSize();
 }
@@ -13,12 +13,12 @@ function UpdateTableSize() {
     height = height * 0.9;
     width = width * 0.45;
 
-    height = height / document.querySelectorAll("#main-table > tbody > tr").length
-    width = width / document.querySelectorAll("#main-table > tbody > tr:first-child > td").length
+    height = height / document.querySelectorAll("#main-table > tr").length
+    width = width / document.querySelectorAll("#main-table > tr:first-child > td").length
 
     const min = Math.min(height, width);
     let squareSize = `${min}px`
-    for (const element of document.querySelectorAll("#main-table > tbody > tr > td")) {
+    for (const element of document.querySelectorAll("#main-table > tr > td")) {
         element.style.width = squareSize;
         element.style.height = squareSize;
     }
@@ -26,7 +26,7 @@ function UpdateTableSize() {
 
 const backgroundCard = document.querySelector(".backgroundCard")
 let cards = []
-
+let table = new Table();
 
 backgroundCard.addEventListener('click', function() {
     cards.push(new Card(1, cards))
@@ -36,8 +36,7 @@ backgroundCard.addEventListener('click', function() {
 window.addEventListener('resize', OnResize)
 OnResize(); // initial call;
 
-const table = document.querySelector("#main-table")
 
-table.addEventListener('click', function() {
+table.htmlElement.addEventListener('click', function() {
     console.log(Card.shape)
 });

@@ -10,15 +10,15 @@ export class Field
         this.table = table;
 
         this.layerTile0 = document.createElement("img");
-        this.layerTile0.src = colorPath;
+        this.layerTile0.src = `icons/${colorPath}`;
         this.layerTile0.style.zIndex = 0;
 
         this.layerEnvironment1 = document.createElement("img");
-        this.layerEnvironment1.src = environmentPath;
+        this.layerEnvironment1.src = `icons/${environmentPath}`;
         this.layerTile0.style.zIndex = 1;
 
         this.layerBuilding2 = document.createElement("img");
-        this.layerBuilding2.src = buildingPath;
+        this.layerBuilding2.src = `icons/${buildingPath}`;
         this.layerTile0.style.zIndex = 2;
 
         this.layerSelection3 = document.createElement("div");
@@ -27,8 +27,25 @@ export class Field
         this.layerTile0.style.zIndex = 3;
     }
 
+    SetBuilding(buildingPath, colorPath) {
+        this.layerBuilding2.src = `icons/${buildingPath}`;
+        this.layerEnvironment1.src = `icons/${Environment.None}`;
+        if (colorPath === undefined) {
+            return;
+        }
+        SetColor(colorPath);
+    }
+
+    SetColor(colorPath) {
+        this.layerTile0.src = `icons/${colorPath}`;
+        this.layerEnvironment1.src = `icons/${Environment.None}`;
+    }
+
+    SetSelected(isSelected) {
+        this.layerSelection3.style.display = isSelected ? '' : 'hidden';
+    }
+
     BindToTD(td) {
-        var td = new HTMLElement();
         td.appendChild(this.layerTile0);
         td.appendChild(this.layerEnvironment1);
         td.appendChild(this.layerBuilding2);

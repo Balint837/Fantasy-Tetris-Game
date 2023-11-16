@@ -1,13 +1,10 @@
 body {
-    position: fixed;
     overflow: hidden;
-    width: 1920px;
-    height: 1088px;
     background-image: url("others/background.png");
-    background-repeat: no-repeat;
+    background-size: auto;
 }
 
-#btnStart{
+/*#btnStart{
     width: 250px;
     height: 150px;
     background-color: #27382D;
@@ -23,14 +20,14 @@ body {
     transform: translateX(-50%);
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
-}
+}*/
 
-#btnStart:hover{
+/*#btnStart:hover{
     cursor: pointer;
     background-color: #508132;
-}
+}*/
 
-#field {
+/*#field {
     float: right;
     max-width: 916px;
     max-height: 916px;
@@ -39,14 +36,14 @@ body {
     border: 10px;
     border: 10px solid #508132;
     border-collapse: collapse;
-}
+}*/
 
-td {
+/*td {
     width: 88px;
     height: 88px;
     background-image: url(icons/tile.png);
     border: 5px solid black;
-}
+}*/
 
 @font-face {
     font-family: EnchantFont;
