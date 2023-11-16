@@ -47,3 +47,124 @@ td {
     background-image: url(icons/tile.png);
     border: 5px solid black;
 }
+
+@font-face {
+    font-family: EnchantFont;
+    src: url('others/EnchantingTable-Regular.ttf') format('truetype');
+}
+
+body{
+    margin: 0;
+}
+
+#base-div{
+    display: flex;
+}
+
+.cardsDiv{
+    display: flex;
+    margin-top: 20%;
+    width: 50%;
+}
+.cardDiv{
+    flex-wrap: wrap;
+    width: 33.33%;
+}
+.tile{
+    background: url(icons/tile.png);
+}
+img[src="icons/"]{
+    display: none;
+}
+
+#cardSelected{
+    border-color: #97ee65; 
+}
+
+.cardDiv{
+    display: inline-block;
+}
+
+.cardTr{
+    height: 3vw;
+    width: 12vw;
+    padding: 0px;
+    margin: 0px;
+}
+.cardTd{
+    height: 3vw;
+    width: 3vw;
+    padding: 0px;
+    margin: 0px;
+}
+.BuildingImg{
+    height: 3vw;
+    width: auto;
+    /* padding: 6px; */
+}
+
+path {
+    fill: transparent;
+}
+.card{
+    width: 90%;
+    height: 25vw;
+    margin: 10px;
+    border: 0.5vw solid #508132;
+    border-radius: 1vw;
+}
+
+.cardTable{
+    position: relative;
+    margin: auto;
+    top: -50%;
+    left: 0%;
+}
+.cardText{
+    font-family: EnchantFont;
+    position: relative;
+    top: 88%;
+    font-size: 1vw;
+    text-align: center;
+}
+.cardTitle{
+    font-family: EnchantFont;
+    position: relative;
+    margin: auto;
+    top: -13%;
+    font-size: 30px;
+    transform: rotate(22deg);
+}
+
+.cardImg{
+    background-image: url(card/card.png);
+    background-size: contain;
+}
+
+.backgroundCard{
+    background-image: url(card/background.png);
+    background-size: contain;
+}
+
+.OffsetCardShape{
+    margin: auto;
+    left: -7%;
+}
+
+
+#main-table {
+    padding-top: 3vh;
+    padding-left: 2.5vh;
+    padding-bottom: 2vh;
+    float:right;
+}
+
+#main-table > tbody > tr > td {
+    border: 0.5vw solid black;
+    /*Check script.js for sizing*/
+}
+
+.selection-div{
+    opacity: 0.4;
+    background-color: blueviolet;
+}
