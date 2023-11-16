@@ -1,7 +1,8 @@
 let x = Math.round(Math.random() * 5);
 let y = Math.round(Math.random() * 5);
 
-console.log(x, y)
+let blue = Math.round(Math.random() * 5 + x);
+let red = Math.round(Math.random() * 5 + x);
 
 function generateTable() {
     const tbl = document.getElementById("field");
@@ -9,10 +10,20 @@ function generateTable() {
 
     for (let i = 0; i < (5 + x); i++) {
         const row = document.createElement("tr");
-
+        
         for (let j = 0; j < (5 + y); j++) {
             const cell = document.createElement("td");
-            row.appendChild(cell);
+            if(i == 0 && j == red){
+                row.appendChild(cell)
+                cell.setAttribute("id", "playerRed")
+            }
+            if(i == x + 5 && j == blue){
+                row.appendChild(cell)
+                cell.setAttribute("id", "playerBlue")
+            }
+            else{
+                row.appendChild(cell);
+            }
         }
         tblBody.appendChild(row);
     }

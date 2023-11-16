@@ -44,6 +44,14 @@ body {
 td {
     width: 88px;
     height: 88px;
-    background-image: url(icons/tile.png);
+    /* background-image: url(icons/tile.png); */
     border: 5px solid black;
+}
+
+#playerRed{
+    background-color: red;
+}
+
+#playerBlue{
+    background-color: blue;
 }
