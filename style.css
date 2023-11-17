@@ -150,17 +150,16 @@ path {
 
 
 #main-table {
-    max-width: 45%;
-    max-height: 90%;
-    padding-top: 3vh;
-    padding-left: 2.5vh;
-    padding-bottom: 2vh;
+    width: 50%;
+    border: 0.5vw solid #508132 ;
     float:right;
+    border-spacing: 0px;
 }
 
-#main-table > tbody > tr > td {
+#main-table > tr > td {
+    border: #000 solid 0.25vw;
+    padding: 0px;
     border: 0 solid black;
-    /*Check script.js for sizing*/
 }
 
 .selection-div{
