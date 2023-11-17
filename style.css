@@ -162,9 +162,10 @@ path {
     border: 0 solid black;
 }
 
-.selection-div{
-    opacity: 0.4;
+.selection-div {
     background-color: blueviolet;
+    width:100%;
+    height:100%;
 }
 
 .table-tile {
