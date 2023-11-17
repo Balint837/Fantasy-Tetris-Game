@@ -13,11 +13,11 @@ function UpdateTableSize() {
     height = height * 0.9;
     width = width * 0.45;
 
-    height = height / document.querySelectorAll("#main-table > tr").length
-    width = width / document.querySelectorAll("#main-table > tr:first-child > td").length
+    height = height / document.querySelectorAll("#main-table > tr").length;
+    width = width / document.querySelectorAll("#main-table > tr:first-child > td").length;
 
     const min = Math.min(height, width);
-    let squareSize = `${min}px`
+    let squareSize = `${min}px`;
     for (const element of document.querySelectorAll("#main-table > tr > td")) {
         element.style.width = squareSize;
         element.style.height = squareSize;

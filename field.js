@@ -9,26 +9,28 @@ export class Field
         this.y = y;
         this.table = table;
 
-        this.layerTile0 = document.createElement("img");
-        this.layerTile0.src = colorPath;
-        this.layerTile0.style.zIndex = 0;
+        this.layerTile0 = this.#CreateImg(0, colorPath);
 
-        this.layerEnvironment1 = document.createElement("img");
-        this.layerEnvironment1.src = environmentPath;
-        this.layerTile0.style.zIndex = 1;
+        this.layerEnvironment1 = this.#CreateImg(1, environmentPath);
 
-        this.layerBuilding2 = document.createElement("img");
-        this.layerBuilding2.src = buildingPath;
-        this.layerTile0.style.zIndex = 2;
+        this.layerBuilding2 = this.#CreateImg(2, buildingPath);
 
         this.layerSelection3 = document.createElement("div");
         this.layerSelection3.classList.add("selection-div");
         this.layerSelection3.style.display = 'hidden';
-        this.layerTile0.style.zIndex = 3;
+        this.layerSelection3.style.zIndex = 3;
     }
 
-    #CreateImg(){
-        img = document.createElement("img");
+    #CreateImg(zindex, src = undefined){
+        const img = document.createElement("img");
+        img.onmou
+        img.classList.add("table-tile");
+        img.style.zIndex = zindex;
+        if (src === undefined) {
+            return;
+        }
+        img.src = src;
+        return img;
     }
 
     SetBuilding(buildingPath, colorPath) {
@@ -38,6 +40,13 @@ export class Field
             return;
         }
         SetColor(colorPath);
+    }
+
+    #OnMouseOver() {
+
+    }
+    #OnMouseLeave() {
+
     }
 
     SetColor(colorPath) {
@@ -54,5 +63,6 @@ export class Field
         td.appendChild(this.layerEnvironment1);
         td.appendChild(this.layerBuilding2);
         td.appendChild(this.layerSelection3);
+        td.onmouseover = this.#OnMouseOver;
     }
 }
