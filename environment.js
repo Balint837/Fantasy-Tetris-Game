@@ -1,7 +1,7 @@
 export class Environment {
-    static None = "";
-    static BeforeHole = "beforeHole.png";
-    static Hole = "hole.png";
-    static Water = "water.png";
-    static Mountain = "mountain.png";
+    static None = "icons/";
+    static BeforeHole = "icons/beforeHole.png";
+    static Hole = "icons/hole.png";
+    static Water = "icons/water.png";
+    static Mountain = "icons/mountain.png";
 }

@@ -97,7 +97,7 @@ export class Card{
                   buildingName = BuildingNames[random];
                 }
                 result += `<td class=\"cardTd tile\">
-                <img src="icons/${buildingName}" alt="BuildingImage" class="BuildingImg">
+                <img src="${buildingName}" alt="BuildingImage" class="BuildingImg">
                 </td>`
                 this.things.push(buildingName)
               }else{

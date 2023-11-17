@@ -1,13 +1,13 @@
 export class Building {
-    static None = "";
-    static Airship = "airship.png";
-    static Boat = "boat.png";
-    static Castle = "castle.png";
-    static Cave = "cave.png";
-    static Dragon = "dragon.png";
-    static Dungeon = "dungeon.png";
-    static Lilypad = "lilypad.png";
-    static StartTile = "startTile.png";
-    static Sword = "sword.png";
-    static Wood = "wood.png";
+    static None = "icons/";
+    static Airship = "icons/airship.png";
+    static Boat = "icons/boat.png";
+    static Castle = "icons/castle.png";
+    static Cave = "icons/cave.png";
+    static Dragon = "icons/dragon.png";
+    static Dungeon = "icons/dungeon.png";
+    static Lilypad = "icons/lilypad.png";
+    static StartTile = "icons/startTile.png";
+    static Sword = "icons/sword.png";
+    static Wood = "icons/wood.png";
 }

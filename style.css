@@ -150,6 +150,8 @@ path {
 
 
 #main-table {
+    max-width: 45%;
+    max-height: 90%;
     padding-top: 3vh;
     padding-left: 2.5vh;
     padding-bottom: 2vh;
