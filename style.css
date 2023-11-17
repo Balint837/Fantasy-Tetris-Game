@@ -159,10 +159,18 @@ path {
 #main-table > tr > td {
     border: #000 solid 0.25vw;
     padding: 0px;
-    /*Check script.js for sizing*/
+    border: 0 solid black;
 }
 
 .selection-div{
     opacity: 0.4;
     background-color: blueviolet;
+}
+
+.table-tile {
+    position: relative;
+    top: 0;
+    left: 0;
+    max-height: 100%;
+    max-width: 100%;
 }
