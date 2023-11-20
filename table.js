@@ -17,14 +17,22 @@ export class Table {
             this.fields.push(currentRow);
             for (let x = 0; x < size; x++) {
                 const td = document.createElement("td");
-                const currentField = new Field();
+                const currentField = new Field(y,x, this);
                 currentField.BindToTD(td);
                 tr.appendChild(td);
                 currentRow.push(currentField);
             }
         }
-        const tbody = document.querySelector("#main-table>tbody");
-        this.htmlElementBody = tbody;
+        this.UnselectAll();
+        document.addEventListener("mouseout", () => { this.UnselectAll() });
+    }
+
+    DrawSelection() {
+
+    }
+
+    UnselectAll() {
+        this.fields[0][0].UnselectAll();
     }
 
     SetupStartPositions() {

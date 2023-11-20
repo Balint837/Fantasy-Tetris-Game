@@ -17,13 +17,13 @@ export class Field
 
         this.layerSelection3 = document.createElement("div");
         this.layerSelection3.classList.add("selection-div");
+        this.layerSelection3.classList.add("table-tile");
         this.layerSelection3.style.display = 'hidden';
         this.layerSelection3.style.zIndex = 3;
     }
 
     #CreateImg(zindex, src = undefined){
         const img = document.createElement("img");
-        img.onmou
         img.classList.add("table-tile");
         img.style.zIndex = zindex;
         if (src === undefined) {
@@ -42,11 +42,22 @@ export class Field
         SetColor(colorPath);
     }
 
-    #OnMouseOver() {
-
+    UnselectAll() {
+        Field.UnselectAll(this.table);
     }
-    #OnMouseLeave() {
 
+    static UnselectAll(table) {
+        for (const row of table.fields) {
+            for (const field of row) {
+                field.layerSelection3.style.opacity = '0';
+            }
+        }
+    }
+
+    #OnMouseOver() {
+        this.UnselectAll();
+        console.log(`hovered x=${this.x}, y=${this.y}`);
+        this.SetSelected(true);
     }
 
     SetColor(colorPath) {
@@ -55,7 +66,7 @@ export class Field
     }
 
     SetSelected(isSelected) {
-        this.layerSelection3.style.display = isSelected ? '' : 'hidden';
+        this.layerSelection3.style.opacity = isSelected ? '1' : '0';
     }
 
     BindToTD(td) {
@@ -63,6 +74,7 @@ export class Field
         td.appendChild(this.layerEnvironment1);
         td.appendChild(this.layerBuilding2);
         td.appendChild(this.layerSelection3);
-        td.onmouseover = this.#OnMouseOver;
+        //document.addEventListener("")
+        td.onmouseover = () => { this.#OnMouseOver() };
     }
 }
