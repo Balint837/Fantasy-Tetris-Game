@@ -18,6 +18,15 @@ export class Card{
         [null, null]
       ]
 
+      static ResetShape(){
+        shape = [
+          [null, null],
+          [null, null],
+          [null, null],
+          [null, null]
+        ]
+      }
+
       static getShape() {
         return this.shape;
       }

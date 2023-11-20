@@ -1,6 +1,7 @@
 import { Color } from "./color.js";
 import { Environment } from "./environment.js";
 import { Building } from "./building.js";
+import { Card } from "./card.js";
 export class Field
 {
     constructor(x, y, table, colorPath = Color.None, environmentPath = Environment.None, buildingPath = Building.None) // x: int, y: int, color: 
@@ -46,18 +47,103 @@ export class Field
         Field.UnselectAll(this.table);
     }
 
-    static UnselectAll(table) {
-        for (const row of table.fields) {
-            for (const field of row) {
-                field.layerSelection3.style.opacity = '0';
+    UnselectAll() {
+        this.table.UnselectAll();
+    }
+
+    RotateShape(){
+
+    }
+
+    #RotateGridClockwise(grid){
+        let gridHeight = grid.length;
+        let gridLength = grid[0].length;
+
+        const output = []
+        for (let i = 0; i < gridLength; i++) {
+            const newRow = []
+            for (let i = 0; i < gridHeight; i++) {
+                newRow.push(undefined);
+            }
+            output.push(newRow);
+        }
+
+        for (let y = 0; y < gridHeight; y++) {
+            const row = grid[y];
+            if (row.length != gridLength) {
+                throw new Error("This isn't a valid matrix!");
+            }
+            for (let x = 0; x < gridLength; x++) {
+                const element = row[x];
+                output[x][gridHeight-y-1] = element;
             }
         }
+        return output;
     }
 
     #OnMouseOver() {
-        this.UnselectAll();
         console.log(`hovered x=${this.x}, y=${this.y}`);
-        this.SetSelected(true);
+
+        this.UnselectAll();
+        let shape = Card.shape;
+
+        console.log(shape);
+        for (let i = 0; i < this.table.rotation; i++) {
+            shape = this.#RotateGridClockwise(shape);
+        }
+        console.log(shape);
+
+        let transformShape = [];
+        for (const row of shape) {
+            for (const buildingType of row) {
+                if (buildingType != null) {
+                    transformShape.push(row);
+                    break;
+                }
+            }
+        }
+        shape = transformShape;
+        let columns = []
+        for (const row of shape) {
+            for (let x = 0; x < row.length; x++) {
+                const element = row[x];
+                const isNotNull = element != null;
+                if (columns.length == x) {
+                    columns.push(isNotNull);
+                }
+                else{
+                    columns[x] |= isNotNull;
+                }
+            }
+            // console.log(columns);
+        }
+        // console.log(columns);
+        
+        for (let row of shape) {
+            for (let i = row.length-1; i > -1; i--) {
+                const columnHasElements = columns[i];
+                if (!columnHasElements) {
+                    row.splice(i,1);
+                }
+            }
+        }
+        const tableLength = this.table.fields[0].length;
+        const tableHeight = this.table.fields.length;
+        for (let y = 0; y < shape.length; y++) {
+            const row = shape[y];
+
+            for (let x = 0; x < row.length; x++) {
+                if (row[x] == null) {
+                    continue;
+                }
+                const isOutOfBounds = this.x+x >= tableLength || this.y+y >= tableHeight;
+                if (isOutOfBounds) {
+                    this.UnselectAll();
+                    return;
+                }
+                this.table.fields[this.y+y][this.x+x].SetSelected(true);
+            }
+        }
     }
 
     SetColor(colorPath) {
