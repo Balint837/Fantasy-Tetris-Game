@@ -7,7 +7,7 @@ body {
     background-repeat: no-repeat;
 }
 
-#btnStart{
+#btnStart {
     width: 250px;
     height: 150px;
     background-color: #27382D;
@@ -25,7 +25,7 @@ body {
     transform: translateY(-50%);
 }
 
-#btnStart:hover{
+#btnStart:hover {
     cursor: pointer;
     background-color: #508132;
 }
@@ -44,14 +44,29 @@ body {
 td {
     width: 88px;
     height: 88px;
-    /* background-image: url(icons/tile.png); */
     border: 5px solid black;
 }
 
-#playerRed{
-    background-color: red;
+.title {
+    background-image: url(icons/tile.png);
 }
 
-#playerBlue{
-    background-color: blue;
+#playerRed {
+    background-image: url(icons/tile_red.png) !important;
+}
+
+#playerBlue {
+    background-image: url(icons/tile_blue.png) !important;
+}
+
+.crack {
+    background-image: url(icons/tile.png);
+}
+
+.hole {
+    background-image: url(icons/tile.png);
+}
+
+.lake {
+    background-image: url(icons/tile.png);
 }
