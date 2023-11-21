@@ -2,6 +2,7 @@ import { Color } from "./color.js";
 import { Environment } from "./environment.js";
 import { Building } from "./building.js";
 import { Card } from "./card.js";
+import { GetSrc } from "./utils.js";
 export class Field
 {
     constructor(x, y, table, colorPath = Color.None, environmentPath = Environment.None, buildingPath = Building.None) // x: int, y: int, color: 
@@ -21,6 +22,7 @@ export class Field
         this.layerSelection3.classList.add("table-tile");
         this.layerSelection3.style.display = 'hidden';
         this.layerSelection3.style.zIndex = 3;
+        
     }
 
     #CreateImg(zindex, src = undefined){
@@ -34,25 +36,147 @@ export class Field
         return img;
     }
 
-    SetBuilding(buildingPath, colorPath) {
+    SetBuilding(buildingPath, environmentPath=undefined, colorPath=undefined) {
         this.layerBuilding2.src = buildingPath;
-        this.layerEnvironment1.src = environmentPath;
-        if (colorPath === undefined) {
-            return;
+        if (environmentPath != undefined) {
+            this.layerEnvironment1.src = environmentPath;   
         }
-        SetColor(colorPath);
-    }
-
-    UnselectAll() {
-        Field.UnselectAll(this.table);
+        if (colorPath != undefined) {
+            this.SetColor(colorPath);
+        }
     }
 
     UnselectAll() {
         this.table.UnselectAll();
     }
 
-    RotateShape(){
+    #TryPlace(){
+        console.log("click!");
+        const tableLength = this.table.fields[0].length;
+        const tableHeight = this.table.fields.length;
+        const shape = this.#CutGridForSelection(Card.shape);
+        console.log(shape);
+        let anyWithNeighbors = false;
+        if (!shape.length) {
+            console.log("nothing is selected!");
+            return;
+        }
+        for (let y = 0; y < shape.length; y++) {
+            const row = shape[y];
 
+            for (let x = 0; x < row.length; x++) {
+                const currentBuilding = row[x];
+                if (currentBuilding == null) {
+                    continue;
+                }
+                const isOutOfBounds = this.x+x >= tableLength || this.y+y >= tableHeight;
+                if (isOutOfBounds) {
+                    console.log("out of bounds!");
+                    return;
+                }
+                const field = this.table.fields[this.y+y][this.x+x];
+
+                if (!anyWithNeighbors) {
+                    let ty = this.y+y-1;
+                    let tx = this.x+x;
+                    if (ty > -1 && ty < tableHeight) {
+                        anyWithNeighbors |= GetSrc(this.table.fields[ty][tx].layerTile0) == this.table.currentPlayer;
+                    }
+                    ty = ty+2;
+                    if (ty > -1 && ty < tableHeight) {
+                        anyWithNeighbors |= GetSrc(this.table.fields[ty][tx].layerTile0) == this.table.currentPlayer;
+                    }
+                    ty = ty-1;
+                    tx = tx-1;
+                    if (tx > -1 && tx < tableLength) {
+                        anyWithNeighbors |= GetSrc(this.table.fields[ty][tx].layerTile0) == this.table.currentPlayer;
+                    }
+                    tx = tx+2;
+                    if (tx > -1 && tx < tableLength) {
+                        anyWithNeighbors |= GetSrc(this.table.fields[ty][tx].layerTile0) == this.table.currentPlayer;
+                    }
+                }
+
+                if (GetSrc(field.layerEnvironment1) == Environment.Mountain) {
+                    console.log("mountain!");
+                    return;
+                }
+                if (GetSrc(field.layerBuilding2) == Building.StartTile) {
+                    console.log("start tile!");
+                    return;
+                }
+                
+                if (field.table.currentPlayer == GetSrc(field.layerTile0)) {
+                    console.log("you own this tile!")
+                    return;
+                }
+                else if (GetSrc(field.layerTile0) != Color.None) {
+                    if (currentBuilding != Building.Sword) {
+                        console.log(`the enemy owns this tile! '${currentBuilding}', '${field.layerTile0.src}'`)
+                        return;
+                    }
+                }
+                else{
+                    switch (currentBuilding) {
+                        case Building.Airship:
+                            break;
+                        case Building.Lilypad:
+                            if (GetSrc(field.layerEnvironment1) == Environment.Hole) {
+                                console.log("lilypads can't go here!")
+                                return;
+                            }
+                            break;
+                        case Building.Boat:
+                            if (GetSrc(field.layerEnvironment1) != Environment.Water) {
+                                console.log("boats can't go here!")
+                                return;
+                            }
+                            break;
+                        default:
+                            if (GetSrc(field.layerEnvironment1) != Environment.BeforeHole && GetSrc(field.layerEnvironment1) != Environment.None) {
+                                console.log("that can't go there!")
+                                return;
+                            }
+                            break;
+                    }
+                }
+            }
+        }
+
+        if (!anyWithNeighbors) {
+            console.log("no neighboring friendlies!")
+            return;
+        }
+        for (let y = 0; y < shape.length; y++) {
+            const row = shape[y];
+
+            for (let x = 0; x < row.length; x++) {
+                const currentBuilding = row[x];
+                if (currentBuilding == null) {
+                    continue;
+                }
+                const field = this.table.fields[this.y+y][this.x+x];
+
+                if (GetSrc(field.layerTile0) == Color.None) { //empty field
+                    field.SetBuilding(currentBuilding, undefined, this.table.currentPlayer);
+                    if (GetSrc(field.layerEnvironment1) != Environment.Hole && GetSrc(field.layerEnvironment1) != Environment.Water) {
+                        field.layerEnvironment1.src = Environment.None;
+                    }
+                    if (currentBuilding == Building.Sword) {
+                        field.SetBuilding(Building.None);
+                    }
+                }
+                else { //enemy field
+                    if (currentBuilding != Building.Sword) {
+                        console.log(`only swords go here! '${currentBuilding}', '${GetSrc(field.layerTile0)}'`)
+                        return;
+                    }
+                    field.SetBuilding(Building.None, undefined, Color.None);
+                }
+            }
+        }
+        this.table.PassTurn();
+        this.UnselectAll();
     }
 
     #RotateGridClockwise(grid){
@@ -81,17 +205,13 @@ export class Field
         return output;
     }
 
-    #OnMouseOver() {
-        console.log(`hovered x=${this.x}, y=${this.y}`);
+    #CutGridForSelection(shape){
 
-        this.UnselectAll();
-        let shape = Card.shape;
-
-        console.log(shape);
+        
         for (let i = 0; i < this.table.rotation; i++) {
             shape = this.#RotateGridClockwise(shape);
         }
-        console.log(shape);
+        
 
         let transformShape = [];
         for (const row of shape) {
@@ -115,9 +235,7 @@ export class Field
                     columns[x] |= isNotNull;
                 }
             }
-            // console.log(columns);
         }
-        // console.log(columns);
         
         for (let row of shape) {
             for (let i = row.length-1; i > -1; i--) {
@@ -127,6 +245,13 @@ export class Field
                 }
             }
         }
+        return shape;
+    }
+
+    #OnMouseOver() {
+
+        const shape = this.#CutGridForSelection(Card.shape);
+        this.UnselectAll();
         const tableLength = this.table.fields[0].length;
         const tableHeight = this.table.fields.length;
         for (let y = 0; y < shape.length; y++) {
@@ -146,13 +271,15 @@ export class Field
         }
     }
 
-    SetColor(colorPath) {
+    SetColor(colorPath, environmentPath=undefined) {
         this.layerTile0.src = colorPath;
-        this.layerEnvironment1.src = environmentPath;
+        if (environmentPath != undefined) {
+            this.layerEnvironment1.src = environmentPath;
+        }
     }
 
     SetSelected(isSelected) {
-        this.layerSelection3.style.opacity = isSelected ? '1' : '0';
+        this.layerSelection3.style.opacity = isSelected ? '0.4' : '0';
     }
 
     BindToTD(td) {
@@ -162,5 +289,6 @@ export class Field
         td.appendChild(this.layerSelection3);
         //document.addEventListener("")
         td.onmouseover = () => { this.#OnMouseOver() };
+        td.addEventListener("click", () => { this.#TryPlace() });
     }
 }
