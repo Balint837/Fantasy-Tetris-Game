@@ -18,6 +18,15 @@ export class Card{
         [null, null]
       ]
 
+      static Reset(){
+        Card.shape = [
+          [null, null],
+          [null, null],
+          [null, null],
+          [null, null]
+        ]
+      }
+
       static getShape() {
         return this.shape;
       }
@@ -36,6 +45,7 @@ export class Card{
           cardDiv.innerHTML += this.#AddTable(tetrisShapes[random], random)
 
           cardsDiv.appendChild(cardDiv)
+          this.cardDiv = cardDiv;
 
       }
     
