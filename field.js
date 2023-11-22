@@ -23,7 +23,8 @@ export class Field
         this.layerSelection3.style.zIndex = 3;
 
         this.layerSelectionBuilding4 = this.#CreateImg(4, Building.None);
-        this.layerSelectionBuilding4.style.opacity = '0';
+        
+        this.SetSelected(false);
     }
 
     #CreateImg(zindex, src = undefined){
@@ -69,7 +70,8 @@ export class Field
                 }
                 const isOutOfBounds = this.x+x >= tableLength || this.y+y >= tableHeight;
                 if (isOutOfBounds) {
-                    alert("Out of bounds!");
+                    alertText = document.querySelector("#alertText")[0]
+                    alertText.innerHTML = "Out of bounds"
                     return;
                 }
                 const field = this.table.fields[this.y+y][this.x+x];
@@ -96,21 +98,29 @@ export class Field
                 }
 
                 if (GetSrc(field.layerEnvironment1) == Environment.Mountain) {
-                    alert("The mountain is in the way!")
+                    const alertText = document.getElementById("alertText")
+                    alertText.innerHTML = "The mountain is in the way!"
+                    alertText.style.color = "red"
                     return;
                 }
                 if (GetSrc(field.layerBuilding2) == Building.StartTile) {
-                    alert("You can't place on your starting tile!");
+                    const alertText = document.getElementById("alertText")
+                    alertText.innerHTML = "You can't place on your starting tile!"
+                    alertText.style.color = "red"
                     return;
                 }
                 
                 if (field.table.currentPlayer == GetSrc(field.layerTile0)) {
-                    alert("This is your own territory!")
+                    const alertText = document.getElementById("alertText")
+                    alertText.innerHTML = "This is your own territory!"
+                    alertText.style.color = "red"
                     return;
                 }
                 else if (GetSrc(field.layerTile0) != Color.None) {
                     if (currentBuilding != Building.Sword) {
-                        alert("The enemy owns this tile!")
+                        const alertText = document.getElementById("alertText")
+                        alertText.innerHTML = "The enemy owns this tile!"
+                        alertText.style.color = "red"
                         return;
                     }
                 }
@@ -120,19 +130,25 @@ export class Field
                             break;
                         case Building.Boat:
                             if (GetSrc(field.layerEnvironment1) != Environment.BeforeHole && GetSrc(field.layerEnvironment1) != Environment.None && GetSrc(field.layerEnvironment1) != Environment.Water) {
-                                alert("A boat needs surface or water!")
+                                const alertText = document.getElementById("alertText")
+                                alertText.innerHTML = "A boat needs surface or water!"
+                                alertText.style.color = "red"
                                 return;
                             }
                             break;
                         case Building.Lilypad:
                             if (GetSrc(field.layerEnvironment1) == Environment.Hole) {
-                                alert("Lilypads can't on a hole!")
+                                const alertText = document.getElementById("alertText")
+                                alertText.innerHTML = "Lilypads can't on a hole!"
+                                alertText.style.color = "red"
                                 return;
                             }
                             break;
                         default:
                             if (GetSrc(field.layerEnvironment1) != Environment.BeforeHole && GetSrc(field.layerEnvironment1) != Environment.None) {
-                                alert("A building needs surface!")
+                                const alertText = document.getElementById("alertText")
+                                alertText.innerHTML = "A building needs surface!"
+                                alertText.style.color = "red"
                                 return;
                             }
                             break;
@@ -168,7 +184,9 @@ export class Field
                 }
                 else { //enemy field
                     if (currentBuilding != Building.Sword) {
-                        alert("you shouldn't be able to see this (building!=sword)")
+                        const alertText = document.getElementById("alertText")
+                        alertText.innerHTML = "You shouldn't be able to see this (building!=sword)"
+                        alertText.style.color = "red"
                         return;
                     }
                     field.SetBuilding(Building.None, undefined, Color.None);
@@ -291,8 +309,8 @@ export class Field
         td.appendChild(this.layerTile0);
         td.appendChild(this.layerEnvironment1);
         td.appendChild(this.layerBuilding2);
-        td.appendChild(this.layerSelection3);
         td.appendChild(this.layerSelectionBuilding4);
+        td.appendChild(this.layerSelection3);
         //document.addEventListener("")
         td.onmouseover = () => { this.#OnMouseOver() };
         td.addEventListener("click", () => { this.#TryPlace() });

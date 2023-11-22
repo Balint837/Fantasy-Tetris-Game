@@ -20,7 +20,7 @@ export class Table {
         this.fields = [];
         const currentPlayerText = document.querySelector("#currentPlayer p");
         this.currentPlayer = Color.Red;
-        currentPlayerText.innerText = "Red";
+        currentPlayerText.innerText = "Soron lévő játékos: Piros";
         document.querySelector("#winAnnouncement p").innerText = " ";
         for (let y = 0; y < size; y++) {
             const currentRow = [];
@@ -67,14 +67,16 @@ export class Table {
         }
         this.rotation = 0;
         const currentPlayerText = document.querySelector("#currentPlayer p");
-
+        const alertText = document.getElementById("alertText")
+        alertText.innerHTML = "Válassz egy kártyát"
+        alertText.style.color = "white"
         if (this.currentPlayer == Color.Red) {
             this.currentPlayer = Color.Blue
-            currentPlayerText.innerText = "Blue";
+            currentPlayerText.innerText = "Soron lévő játékos: Kék";
         }
         else{
             this.currentPlayer = Color.Red;
-            currentPlayerText.innerText = "Red";
+            currentPlayerText.innerText = "Soron lévő játékos: Piros";
         }
 
         Card.Reset();
@@ -109,13 +111,13 @@ export class Table {
         const scores = this.RefreshScore();
         const winText = document.querySelector("#winAnnouncement p");
         if (scores[0] == scores[1]) {
-            winText.innerText = "Draw!";
+            winText.innerText = "Döntetlen!";
         }
         else if (scores[0] < scores[1]) {
-            winText.innerText = "Blue won!";
+            winText.innerText = "Kék nyert!";
         }
         else{
-            winText.innerText = "Red won!";
+            winText.innerText = "Piros nyert!";
         }
         this.gameOver = true;
     }

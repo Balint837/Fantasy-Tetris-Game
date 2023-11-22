@@ -2,8 +2,55 @@ body {
     overflow: hidden;
     background-image: url("others/background.png");
     background-size: auto;
+
 }
 
+.miscDiv{
+    position: fixed;
+    width: 50%;
+    left: 10px;
+    top: 0vw;
+    color: #fff;
+    font-size: 1vw;
+}
+
+#winAnnouncement{
+    font-size: 1vw;
+}
+
+#passButton{
+    background-color: #27382D;
+    border: 1px solid #000;
+    width: 33.33%;
+    height: 10%;
+    color: #fff;
+    font-size: 4vw;
+    font-family: 'Courier New', Courier, monospace;
+    border-radius: 10%;
+}
+
+.text{
+    color: #fff;
+    font-size: 2vw;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.textDiv{
+    display: flex;
+    justify-content: space-around;
+}
+
+@media only screen and (min-width: 1670px) {
+    .text{
+        /* margin-bottom: -50vw; */
+    }
+    .textDiv{
+        display: block;
+        position: fixed;
+        top: 10vw;
+        left: 10px;
+    }
+}
 /*#btnStart{
     width: 250px;
     height: 150px;
@@ -151,8 +198,8 @@ path {
 
 #main-table {
     margin: 1vh 1vh 0vh 1vh;
-    height: 0;
     border: 0.5vw solid #508132 ;
+    height: 0;
     float:right;
     border-spacing: 0px;
     border-collapse: initial;
@@ -163,12 +210,21 @@ path {
 #main-table > tr > td {
     border: #000 solid 0.25vw;
     padding: 0px;
+    max-height: 4.2vw;
+    min-height: 4.2vw;
+}
+#main-table > tr > td > *{
+    position: absolute;
+
 }
 
 .selection-div {
     background-color: blueviolet;
-    width:100%;
-    height:100%;
+    position: relative !important; 
+    vertical-align: middle;
+    object-fit: fill; 
+    max-height: 4.2vw;
+    min-height: 4.2vw;
 }
 
 .table-tile {

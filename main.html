@@ -9,12 +9,6 @@
 <body>
     <div id="base-div">
         <div class="miscDiv">
-            <button id="passButton">
-                Pass
-            </button>
-            <div id="currentPlayer">
-                <p> </p>
-            </div>
             <div id="redPlayerScore">
                 <p>Red: <span>-</span></p>
             </div>
@@ -24,6 +18,9 @@
             <div id="winAnnouncement">
                 <p> </p>
             </div>
+            <button id="passButton">
+                Pass
+            </button>
         </div>
         <div class="cardsDiv">
             <div class="cardDiv">
@@ -47,6 +44,14 @@
                 <td></td>
             </tr>
         </table>
+    </div>
+    <div class="textDiv">
+        <div id="currentPlayer">
+            <p class="text">Soron lévő játékos:</p>
+        </div>
+        <div>
+            <p class="text" id="alertText">Válassz egy kártyát</p>
+        </div>
     </div>
 </body>
 <script src="script.js" type="module"></script>
