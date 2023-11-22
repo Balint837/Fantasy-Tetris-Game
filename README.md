@@ -38,14 +38,12 @@
     - Barlang: 1
     - Dungeon: 1
     - Zeppelin: 1
-    - Kikötő: 1
-    - Liliom: 3
+    - Liliom: 5
     - Hajó: 0
 - Feltételes pontok:
     - Zeppelin lyuk felett: +2
     - Zeppelin víz felett: +1
     - Sárkány barlang mellett: +2
-    - Kikötő víz mellett: +2
     - Kastély az ellenféllel érintkezik: +1
     - Fa víz mellett: +1
     - Hajó vízen: +3

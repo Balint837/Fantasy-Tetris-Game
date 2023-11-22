@@ -20,9 +20,10 @@ export class Field
         this.layerSelection3 = document.createElement("div");
         this.layerSelection3.classList.add("selection-div");
         this.layerSelection3.classList.add("table-tile");
-        this.layerSelection3.style.display = 'hidden';
         this.layerSelection3.style.zIndex = 3;
-        
+
+        this.layerSelectionBuilding4 = this.#CreateImg(4, Building.None);
+        this.layerSelectionBuilding4.style.opacity = '0';
     }
 
     #CreateImg(zindex, src = undefined){
@@ -51,14 +52,11 @@ export class Field
     }
 
     #TryPlace(){
-        console.log("click!");
         const tableLength = this.table.fields[0].length;
         const tableHeight = this.table.fields.length;
         const shape = this.#CutGridForSelection(Card.shape);
-        console.log(shape);
         let anyWithNeighbors = false;
         if (!shape.length) {
-            console.log("nothing is selected!");
             return;
         }
         for (let y = 0; y < shape.length; y++) {
@@ -71,7 +69,7 @@ export class Field
                 }
                 const isOutOfBounds = this.x+x >= tableLength || this.y+y >= tableHeight;
                 if (isOutOfBounds) {
-                    console.log("out of bounds!");
+                    alert("Out of bounds!");
                     return;
                 }
                 const field = this.table.fields[this.y+y][this.x+x];
@@ -98,21 +96,21 @@ export class Field
                 }
 
                 if (GetSrc(field.layerEnvironment1) == Environment.Mountain) {
-                    console.log("mountain!");
+                    alert("The mountain is in the way!")
                     return;
                 }
                 if (GetSrc(field.layerBuilding2) == Building.StartTile) {
-                    console.log("start tile!");
+                    alert("You can't place on your starting tile!");
                     return;
                 }
                 
                 if (field.table.currentPlayer == GetSrc(field.layerTile0)) {
-                    console.log("you own this tile!")
+                    alert("This is your own territory!")
                     return;
                 }
                 else if (GetSrc(field.layerTile0) != Color.None) {
                     if (currentBuilding != Building.Sword) {
-                        console.log(`the enemy owns this tile! '${currentBuilding}', '${field.layerTile0.src}'`)
+                        alert("The enemy owns this tile!")
                         return;
                     }
                 }
@@ -120,21 +118,21 @@ export class Field
                     switch (currentBuilding) {
                         case Building.Airship:
                             break;
-                        case Building.Lilypad:
-                            if (GetSrc(field.layerEnvironment1) == Environment.Hole) {
-                                console.log("lilypads can't go here!")
+                        case Building.Boat:
+                            if (GetSrc(field.layerEnvironment1) != Environment.BeforeHole && GetSrc(field.layerEnvironment1) != Environment.None && GetSrc(field.layerEnvironment1) != Environment.Water) {
+                                alert("A boat needs surface or water!")
                                 return;
                             }
                             break;
-                        case Building.Boat:
-                            if (GetSrc(field.layerEnvironment1) != Environment.Water) {
-                                console.log("boats can't go here!")
+                        case Building.Lilypad:
+                            if (GetSrc(field.layerEnvironment1) == Environment.Hole) {
+                                alert("Lilypads can't on a hole!")
                                 return;
                             }
                             break;
                         default:
                             if (GetSrc(field.layerEnvironment1) != Environment.BeforeHole && GetSrc(field.layerEnvironment1) != Environment.None) {
-                                console.log("that can't go there!")
+                                alert("A building needs surface!")
                                 return;
                             }
                             break;
@@ -144,7 +142,6 @@ export class Field
         }
 
         if (!anyWithNeighbors) {
-            console.log("no neighboring friendlies!")
             return;
         }
         for (let y = 0; y < shape.length; y++) {
@@ -165,10 +162,13 @@ export class Field
                     if (currentBuilding == Building.Sword) {
                         field.SetBuilding(Building.None);
                     }
+                    if (currentBuilding == Building.Lilypad && GetSrc(field.layerEnvironment1) != Environment.Water) {
+                        field.SetBuilding(Building.None);
+                    }
                 }
                 else { //enemy field
                     if (currentBuilding != Building.Sword) {
-                        console.log(`only swords go here! '${currentBuilding}', '${GetSrc(field.layerTile0)}'`)
+                        alert("you shouldn't be able to see this (building!=sword)")
                         return;
                     }
                     field.SetBuilding(Building.None, undefined, Color.None);
@@ -249,7 +249,9 @@ export class Field
     }
 
     #OnMouseOver() {
-
+        if (this.table.gameOver) {
+            return;
+        }
         const shape = this.#CutGridForSelection(Card.shape);
         this.UnselectAll();
         const tableLength = this.table.fields[0].length;
@@ -258,7 +260,8 @@ export class Field
             const row = shape[y];
 
             for (let x = 0; x < row.length; x++) {
-                if (row[x] == null) {
+                const building = row[x];
+                if (building == null) {
                     continue;
                 }
                 const isOutOfBounds = this.x+x >= tableLength || this.y+y >= tableHeight;
@@ -266,7 +269,7 @@ export class Field
                     this.UnselectAll();
                     return;
                 }
-                this.table.fields[this.y+y][this.x+x].SetSelected(true);
+                this.table.fields[this.y+y][this.x+x].SetSelected(true, building);
             }
         }
     }
@@ -278,8 +281,10 @@ export class Field
         }
     }
 
-    SetSelected(isSelected) {
-        this.layerSelection3.style.opacity = isSelected ? '0.4' : '0';
+    SetSelected(isSelected, building=Building.None) {
+        this.layerSelection3.style.opacity = isSelected ? '0.25' : '0';
+        this.layerSelectionBuilding4.style.opacity = isSelected ? '0.5' : '0';
+        this.layerSelectionBuilding4.src = building;
     }
 
     BindToTD(td) {
@@ -287,6 +292,7 @@ export class Field
         td.appendChild(this.layerEnvironment1);
         td.appendChild(this.layerBuilding2);
         td.appendChild(this.layerSelection3);
+        td.appendChild(this.layerSelectionBuilding4);
         //document.addEventListener("")
         td.onmouseover = () => { this.#OnMouseOver() };
         td.addEventListener("click", () => { this.#TryPlace() });
