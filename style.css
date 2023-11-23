@@ -32,17 +32,21 @@ body {
 .text{
     color: #fff;
     font-size: 2vw;
+    margin-left: 15vw;
     font-family: 'Courier New', Courier, monospace;
 }
 
 .textDiv{
+    position:fixed;
+    top: 50vw;
+    left: 1vw;
     display: flex;
     justify-content: space-around;
 }
 
-@media only screen and (min-width: 1670px) {
+@media only screen and (min-width: 1870px) {
     .text{
-        /* margin-bottom: -50vw; */
+        margin-left: 1vw;
     }
     .textDiv{
         display: block;
@@ -246,6 +250,7 @@ path {
         width: 9.1vw;
         vertical-align: middle;
         object-fit: fill; 
+        margin-bottom:5vw;
     }
     .cardsDiv{
         margin-top: 1vh;
@@ -285,11 +290,56 @@ path {
         margin: 0px;
     }
     .BuildingImg{
-        height: 2vw;
+        height: 4.2vw;
         width: auto;
         /* padding: 6px; */
     }
     .OffsetCardShape{
         left: -5%;
     }
+
+
+    .miscDiv{
+        display: flex;
+        justify-content:space-around;
+        flex-direction:row-reverse;
+        position: fixed;
+        width: 100%;
+        left: 10px;
+        top: 180vw;
+        color: #fff;
+        font-size: 5vw;
+        align-items: center;
+    }
+    
+    #winAnnouncement{
+        font-size: 1vw;
+    }
+    
+    #passButton{
+        background-color: #27382D;
+        border: 1px solid #000;
+        width: 33.33%;
+        height: 10%;
+        color: #fff;
+        font-size: 4vw;
+        font-family: 'Courier New', Courier, monospace;
+        border-radius: 10%;
+    }
+    
+    .text{
+        color: #fff;
+        font-size: 3vw;
+        font-family: 'Courier New', Courier, monospace;
+    }
+    
+    .textDiv{
+        display: flex;
+        justify-content: space-around;
+    }
+    
+    .textDiv{
+        position:unset;
+    }
+    
 }

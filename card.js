@@ -37,6 +37,7 @@ export class Card{
           cardDiv.classList.add("cardDiv")
           cardDiv.addEventListener('click', () => {
             this.#Select();
+
           });
 
           const random = Math.floor(Math.random() * tetrisShapes.length);
@@ -62,6 +63,9 @@ export class Card{
             const cardElement = document.querySelectorAll(".cardDiv .card")[card.index]
             cardElement.id = ""
           }
+          const alertText = document.getElementById("alertText")
+          alertText.innerHTML = "Helyezd el a választott tetrist!"
+          alertText.style.color = "white"
         });
 
       }
