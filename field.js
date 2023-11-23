@@ -70,8 +70,9 @@ export class Field
                 }
                 const isOutOfBounds = this.x+x >= tableLength || this.y+y >= tableHeight;
                 if (isOutOfBounds) {
-                    alertText = document.querySelector("#alertText")[0]
-                    alertText.innerHTML = "Out of bounds"
+                    const alertText = document.getElementById("alertText")
+                    alertText.innerHTML = "Határon kívül nem helyezheted!"
+                    alertText.style.color = "red"
                     return;
                 }
                 const field = this.table.fields[this.y+y][this.x+x];
@@ -99,27 +100,27 @@ export class Field
 
                 if (GetSrc(field.layerEnvironment1) == Environment.Mountain) {
                     const alertText = document.getElementById("alertText")
-                    alertText.innerHTML = "The mountain is in the way!"
+                    alertText.innerHTML = "A hegy útban van!"
                     alertText.style.color = "red"
                     return;
                 }
                 if (GetSrc(field.layerBuilding2) == Building.StartTile) {
                     const alertText = document.getElementById("alertText")
-                    alertText.innerHTML = "You can't place on your starting tile!"
+                    alertText.innerHTML = "Nem tudsz a kezdő lapkádra helyezni!"
                     alertText.style.color = "red"
                     return;
                 }
                 
                 if (field.table.currentPlayer == GetSrc(field.layerTile0)) {
                     const alertText = document.getElementById("alertText")
-                    alertText.innerHTML = "This is your own territory!"
+                    alertText.innerHTML = "Ez a te területed!"
                     alertText.style.color = "red"
                     return;
                 }
                 else if (GetSrc(field.layerTile0) != Color.None) {
                     if (currentBuilding != Building.Sword) {
                         const alertText = document.getElementById("alertText")
-                        alertText.innerHTML = "The enemy owns this tile!"
+                        alertText.innerHTML = "Ez a mező az ellenfelé!"
                         alertText.style.color = "red"
                         return;
                     }
@@ -131,7 +132,7 @@ export class Field
                         case Building.Boat:
                             if (GetSrc(field.layerEnvironment1) != Environment.BeforeHole && GetSrc(field.layerEnvironment1) != Environment.None && GetSrc(field.layerEnvironment1) != Environment.Water) {
                                 const alertText = document.getElementById("alertText")
-                                alertText.innerHTML = "A boat needs surface or water!"
+                                alertText.innerHTML = "A hajónak vízre van szüksége!"
                                 alertText.style.color = "red"
                                 return;
                             }
@@ -139,7 +140,7 @@ export class Field
                         case Building.Lilypad:
                             if (GetSrc(field.layerEnvironment1) == Environment.Hole) {
                                 const alertText = document.getElementById("alertText")
-                                alertText.innerHTML = "Lilypads can't on a hole!"
+                                alertText.innerHTML = "A lilypadet nem rakhatod lyukra!"
                                 alertText.style.color = "red"
                                 return;
                             }
@@ -147,7 +148,7 @@ export class Field
                         default:
                             if (GetSrc(field.layerEnvironment1) != Environment.BeforeHole && GetSrc(field.layerEnvironment1) != Environment.None) {
                                 const alertText = document.getElementById("alertText")
-                                alertText.innerHTML = "A building needs surface!"
+                                alertText.innerHTML = "Az épületet csak üres mezőre rakhatod!"
                                 alertText.style.color = "red"
                                 return;
                             }
@@ -158,6 +159,9 @@ export class Field
         }
 
         if (!anyWithNeighbors) {
+            const alertText = document.getElementById("alertText")
+            alertText.innerHTML = "Kötelező a birodalmaddal érintkeznie!"
+            alertText.style.color = "red"
             return;
         }
         for (let y = 0; y < shape.length; y++) {
@@ -185,7 +189,7 @@ export class Field
                 else { //enemy field
                     if (currentBuilding != Building.Sword) {
                         const alertText = document.getElementById("alertText")
-                        alertText.innerHTML = "You shouldn't be able to see this (building!=sword)"
+                        alertText.innerHTML = "Ezt nem szabadna látnod (épület!=szó)"
                         alertText.style.color = "red"
                         return;
                     }
@@ -196,7 +200,7 @@ export class Field
         this.table.PassTurn();
         this.UnselectAll();
     }
-
+    
     #RotateGridClockwise(grid){
         let gridHeight = grid.length;
         let gridLength = grid[0].length;

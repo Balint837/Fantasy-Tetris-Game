@@ -7,8 +7,13 @@ backgroundCard.addEventListener('click', function() {
     if (table.gameOver) {
       return;
     }
-    table.cards.push(new Card(1, table.cards))
-    table.cards.push(new Card(2, table.cards))
+    if (table.cards.length == 0){
+      table.cards.push(new Card(1, table.cards))
+      table.cards.push(new Card(2, table.cards))
+    }
+    const alertText = document.getElementById("alertText")
+    alertText.innerHTML = "Válassz egy kártyát!"
+    alertText.style.color = "white"
   });
 
 const passButton = document.querySelector("#passButton");

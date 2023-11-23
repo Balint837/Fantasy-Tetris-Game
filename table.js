@@ -37,7 +37,7 @@ export class Table {
             }
         }
         this.UnselectAll();
-        document.addEventListener("auxclick", () => { this.CycleRotation() });
+        document.addEventListener("auxclick", () => { this.CycleRotation() });        
         document.addEventListener("mouseout", () => { this.UnselectAll() });
         this.RandomizeTable();
         this.SetupStartPositions();
@@ -68,7 +68,7 @@ export class Table {
         this.rotation = 0;
         const currentPlayerText = document.querySelector("#currentPlayer p");
         const alertText = document.getElementById("alertText")
-        alertText.innerHTML = "Válassz egy kártyát"
+        alertText.innerHTML = "Húzz két kártyát!"
         alertText.style.color = "white"
         if (this.currentPlayer == Color.Red) {
             this.currentPlayer = Color.Blue
