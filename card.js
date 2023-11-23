@@ -105,10 +105,13 @@ export class Card{
           result += "<tr class=\"cardTr\">"
             x.forEach(i =>{
               if (i === 1){
-                const random = Math.floor(Math.random() * BuildingNames.length*2);
+                const random = Math.floor(Math.random() * BuildingNames.length*2.5);
                 let buildingName = Building.None;
                 if (random < BuildingNames.length) {
                   buildingName = BuildingNames[random];
+                }
+                if (random > BuildingNames.length*2.25) {
+                  buildingName = Building.Sword;
                 }
                 result += `<td class=\"cardTd tile\">
                 <img src="${buildingName}" alt="BuildingImage" class="BuildingImg">
