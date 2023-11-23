@@ -1,6 +1,7 @@
 # Fantasy-Tetris-Game
 
 ### [Figma link](https://www.figma.com/file/TiPvQaxbnc5RITrKLAVvXe/UwU?type=design&node-id=8-90&mode=design&t=DaoWSH9sbgnJqVdP-0)
+### [GithubIO](https://balint837.github.io/Fantasy-Tetris-Game/)
 
 **A játék célja:** Építsd a fantázia birodalmad és kerekedj felül az ellenfeleden.
 
@@ -13,13 +14,11 @@
 - Húz két kártyát
 - Választ egy kártyát
 - Behelyezi a játéktáblára a tetris alakzatot, ami a kártyán van
-- Végrehajtja a bónusz akciókat, ha van
 - Következő játékos jön
 
 **Kártya tartalma:**
 - Egy tetris alakzat
 - Minden egyes négyzetnek van saját fajtája (kép/alakzat)
-- Egy különleges effekt, amely használható a sikeres lehelyezéskor (Nézd meg a “Lehelyezés szabályai”-t)
 - A lehelyezés sikeres ha a tetris alakzat rá-helyezhető a táblára
 
 **Lehelyezés szabályai:**
@@ -47,7 +46,6 @@
     - Kastély az ellenféllel érintkezik: +1
     - Fa víz mellett: +1
     - Hajó vízen: +3
-
 
 **Egyéb:**
 - Rétegek:
